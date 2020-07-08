@@ -35,7 +35,16 @@ $ npm run test:cov
 
 ## Swagger
 
-$ npm install --save @nestjs/swagger swagger-ui-express
+npm install --save @nestjs/swagger swagger-ui-express
+
+npm run build to generate DTO
+https://docs.nestjs.com/openapi/cli-plugin
 
 http://localhost:3000/api
 
+
+## Generator
+npx nest generate --help
+npx nest g module inventories
+npx nest g controller inventories
+npx nest g service inventories

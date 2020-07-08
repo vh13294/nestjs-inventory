@@ -17,7 +17,6 @@ function initSwagger(app: INestApplication) {
     .setTitle('Seng Kea API')
     .setDescription('API description')
     .setVersion('1.0')
-    .addTag('apis')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
