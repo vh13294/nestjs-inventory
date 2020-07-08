@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "dtos",
-        "nestjs"
+        "nestjs",
+        "typeorm"
     ]
 }

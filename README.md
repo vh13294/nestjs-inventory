@@ -48,3 +48,11 @@ npx nest generate --help
 npx nest g module inventories
 npx nest g controller inventories
 npx nest g service inventories
+
+
+## ENV
+npm i --save @nestjs/config
+
+
+## TypeORM
+npm install --save @nestjs/typeorm typeorm mysql

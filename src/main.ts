@@ -5,9 +5,7 @@ import { INestApplication } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   initSwagger(app);
-
   await app.listen(3000);
 }
 bootstrap();
