@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "datetime",
         "dtos",
         "nestjs",
-        "typeorm"
+        "typeorm",
+        "varchar"
     ]
 }

@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { InventoriesModule } from './inventories/inventories.module';
 import typeORMConfig from './config/database.config';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot(), // load .env file
