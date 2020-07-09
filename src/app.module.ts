@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { InventoriesModule } from './inventories/inventories.module';
-import typeORMConfig from './config/database.config';
+// import typeORMConfig from './config/database.config';
+// import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ConfigModule.forRoot(), // load .env file
-    TypeOrmModule.forRoot(typeORMConfig()),
+    // TypeOrmModule.forRoot(typeORMConfig()),
     InventoriesModule
   ],
 })

@@ -6,16 +6,16 @@ import { CreateInventoryDto } from './dtos/create-inventory.dto';
 
 @Controller('inventories')
 export class InventoriesController {
-    constructor(private catsService: InventoriesService) { }
+    constructor(private inventoriesService: InventoriesService) { }
 
     @Post()
     async create(@Body() createInventoryDto: CreateInventoryDto): Promise<Inventory>  {
-        return this.catsService.create(createInventoryDto);
+        return this.inventoriesService.create(createInventoryDto);
     }
 
     @Get()
     async findAll(): Promise<Inventory[]> {
-        return this.catsService.findAll();
+        return this.inventoriesService.findAll();
     }
 
     @Get('info')
