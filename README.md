@@ -56,3 +56,12 @@ npm i --save @nestjs/config
 
 ## TypeORM
 npm install --save @nestjs/typeorm typeorm mysql
+
+
+## PRISMA
+npm install @prisma/cli --save-dev
+npx prisma init
+npx prisma introspect // after database schema changes
+
+npm install @prisma/client
+npx prisma generate // after database schema changes
