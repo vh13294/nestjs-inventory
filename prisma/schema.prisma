@@ -36,22 +36,22 @@ model Customer {
 model Inventory {
   @@map(name: "inventories")
   comment     String?
-  created_at  DateTime?
+  created_at  DateTime? @default(now())
   created_by  Int
   customer_id Int?
   date        DateTime
   deleted_at  DateTime?
-  id          Int        @default(autoincrement()) @id
+  id          Int       @default(autoincrement()) @id
   location_id Int
   product_id  Int
   quantity    Int
   supplier_id Int?
-  updated_at  DateTime?
-  users       User      @relation(fields: [created_by], references: [id])
-  customers   Customer? @relation(fields: [customer_id], references: [id])
-  locations   Location  @relation(fields: [location_id], references: [id])
-  products    Product   @relation(fields: [product_id], references: [id])
-  suppliers   Supplier? @relation(fields: [supplier_id], references: [id])
+  updated_at  DateTime? @updatedAt
+  user        User      @relation(fields: [created_by], references: [id])
+  customer    Customer? @relation(fields: [customer_id], references: [id])
+  location    Location  @relation(fields: [location_id], references: [id])
+  product     Product   @relation(fields: [product_id], references: [id])
+  supplier    Supplier? @relation(fields: [supplier_id], references: [id])
 
   @@index([created_by], name: "inventories_created_by_foreign")
   @@index([customer_id], name: "inventories_customer_id_foreign")
@@ -101,10 +101,10 @@ model Supplier {
 
 model User {
   @@map(name: "users")
-  api_token     String?       @unique
+  api_token     String?     @unique
   created_at    DateTime?
-  email         String        @unique
-  id            Int           @default(autoincrement()) @id
+  email         String      @unique
+  id            Int         @default(autoincrement()) @id
   name          String
   password      String
   registered_at DateTime?

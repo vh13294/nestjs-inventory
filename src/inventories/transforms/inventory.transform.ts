@@ -1,23 +1,25 @@
 import { Inventory } from "@prisma/client";
 
 export type responseInventory = {
-    comment?: string | null
-    createdAt?: Date | null
+    comment?: string
+    createdAt?: Date
     createdBy?: number
-    customerId?: number | null
+    customerId?: number
     date?: Date
-    deletedAt?: Date | null
+    deletedAt?: Date
     id?: number
     locationId?: number
     productId?: number
     quantity?: number
-    supplierId?: number | null
-    updatedAt?: Date | null
+    supplierId?: number
+    updatedAt?: Date
   }
 
 export function inventoryTransform(inventory: Inventory): responseInventory {
     return {
         id: inventory.id,
         quantity: inventory.quantity,
+        createdAt: inventory.created_at,
+        updatedAt: inventory.updated_at,
     }
 };

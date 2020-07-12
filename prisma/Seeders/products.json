@@ -1,0 +1,416 @@
+[
+  {
+    "id": 1,
+    "name": "Alcohol",
+    "khmer": "ស្រាល្អ",
+    "low_stock_warning": 50,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 2,
+    "name": "Alcohol SKD",
+    "khmer": "ស្រា SKD",
+    "low_stock_warning": 50,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 3,
+    "name": "Methanol(E 100)",
+    "khmer": "អាល់កុលគីមី",
+    "low_stock_warning": 20,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 4,
+    "name": "Hydrogen Peroxide(Oci 50%)",
+    "khmer": "អូស៊ី",
+    "low_stock_warning": 30,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 5,
+    "name": "Ammonia",
+    "khmer": "អាម៉ូញាក់",
+    "low_stock_warning": 40,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 6,
+    "name": "Citric Acid",
+    "khmer": "មេជូ",
+    "low_stock_warning": 40,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 7,
+    "name": "CMC",
+    "khmer": "ស៊ីអឹមស៊ី",
+    "low_stock_warning": 10,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 8,
+    "name": "Sodium Bicarbonate",
+    "khmer": "សូដាត្រជាក់",
+    "low_stock_warning": 20,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 9,
+    "name": "Sodium Benzoate (Thai)",
+    "khmer": "ការពារថៃ",
+    "low_stock_warning": 10,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 10,
+    "name": "Sodium Benzoate (China)",
+    "khmer": "ការពារចិន",
+    "low_stock_warning": 50,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 11,
+    "name": "Sodium Benzoate (US)",
+    "khmer": "ការពារអាមេរិច",
+    "low_stock_warning": 5,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 12,
+    "name": "Sodium Saccharin",
+    "khmer": "ស្ករគ្រាប់ចិន I",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 13,
+    "name": "Malic Acid",
+    "khmer": "ជូប៉ម",
+    "low_stock_warning": 5,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 14,
+    "name": "Clouding Agent (France)",
+    "khmer": "ទឹកល្អក់បារាំង",
+    "low_stock_warning": 8,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 15,
+    "name": "NaOH",
+    "khmer": "ស៊ូត",
+    "low_stock_warning": 160,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 16,
+    "name": "Dextrose",
+    "khmer": "ស្ករដិចស្តូស",
+    "low_stock_warning": 60,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 17,
+    "name": "PAC",
+    "khmer": "ផេក",
+    "low_stock_warning": 40,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 18,
+    "name": "Caramel 4400",
+    "khmer": "ពណ៌ ៤៤០០",
+    "low_stock_warning": 25,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 19,
+    "name": "HCL",
+    "khmer": "អាស៊ីតលឿង",
+    "low_stock_warning": 10,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 20,
+    "name": "Glycerin",
+    "khmer": "រក្សាក្លិន",
+    "low_stock_warning": 30,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 21,
+    "name": "Alcohol Container",
+    "khmer": "សំបកកានអាល់កុល",
+    "low_stock_warning": 400,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 22,
+    "name": "Alcohol Container (HP)",
+    "khmer": "សំបកកាន HP",
+    "low_stock_warning": 200,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 23,
+    "name": "Caramel AAA",
+    "khmer": "ពណ៌ AAA",
+    "low_stock_warning": 20,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 24,
+    "name": "Orange Emulsion",
+    "khmer": "ក្រូចខាប់",
+    "low_stock_warning": 7,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 25,
+    "name": "Acid Acetic",
+    "khmer": "មេទឹកខ្មេះ",
+    "low_stock_warning": 8,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 26,
+    "name": "Sodium Cyclamate",
+    "khmer": "ស្ករអំពៅ",
+    "low_stock_warning": 20,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 27,
+    "name": "Phosphoric Acid 85%",
+    "khmer": "អាស៊ីតផូស្វរិច",
+    "low_stock_warning": 7,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 28,
+    "name": "Aluminum Sulfate",
+    "khmer": "សាច់ជូ",
+    "low_stock_warning": 5,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 29,
+    "name": "Tri-sodium citrate",
+    "khmer": "ជំនួយហ្គាស",
+    "low_stock_warning": 8,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 30,
+    "name": "Strawberry NO 2 (20Kg)",
+    "khmer": "ស្ត្រប៊ីរី II",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 31,
+    "name": "Mixed Fruit (20Kg)",
+    "khmer": "គោជល់",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 32,
+    "name": "Orange Crush No1 (20Kg)",
+    "khmer": "ក្រូចរាវ I",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 33,
+    "name": "Pineapple No1 (20Kg)",
+    "khmer": "ម្នាស់ I",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 34,
+    "name": "Cola Flavor (20Kg)",
+    "khmer": "កូឡា",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 35,
+    "name": "Grape SDF1183 (20Kg)",
+    "khmer": "ទំពាំងបាយជូ",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 36,
+    "name": "Lemon No1 (20Kg)",
+    "khmer": "ឡឺម៉ុង",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 37,
+    "name": "Amyl Acetate (25Kg)",
+    "khmer": "ក្លិនទឹកចេក",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 38,
+    "name": "Best One (25Kg)",
+    "khmer": "ម្សៅស្វិត",
+    "low_stock_warning": 5,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 39,
+    "name": "Baking Powder",
+    "khmer": "ម្សៅនំ",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 40,
+    "name": "NS9 Lemon Yellow Colour",
+    "khmer": "លក្ខ័លឿង",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 41,
+    "name": "NS18 Red Colour",
+    "khmer": "លក្ខ័ស៊ីរ៉ូក្រហម",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 42,
+    "name": "NS5 Orange Red Colour",
+    "khmer": "លក្ខ័ក្រូច",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 43,
+    "name": "Phosphate Mix",
+    "khmer": "មិចផូស្វាត",
+    "low_stock_warning": 5,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 44,
+    "name": "NS4 Green Colour No1",
+    "khmer": "លក្ខ័បៃតង (1)",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 45,
+    "name": "NS4 Green Colour No2",
+    "khmer": "លក្ខ័បៃតង (2)",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  },
+  {
+    "id": 46,
+    "name": "Qing Tian Su (sweeteners)",
+    "khmer": "ស្ករម៉ត់ (តុក្កតា)",
+    "low_stock_warning": 4,
+    "status": "active",
+    "created_at": "2020-06-19 21:26:50",
+    "updated_at": "2020-06-19 21:26:50"
+  }
+]

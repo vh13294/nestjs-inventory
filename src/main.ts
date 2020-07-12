@@ -24,7 +24,9 @@ function initPipes(app: INestApplication) {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  initSwagger(app);
+  if (process.env.NODE_ENV === 'development') {
+    initSwagger(app);
+  }
   initPipes(app);
   await app.listen(3000);
 }
