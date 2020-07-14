@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateInventoryDto } from './validations/create-inventory.dto';
-import { responseInventory, inventoryTransform } from './transforms/inventory.transform';
-import { InventoryCreateInput, OrderByArg } from '@prisma/client';
+import { CreateInventoryDto } from './query/create/create-inventory.dto';
+import { responseInventory, inventoryTransform } from './query/create/inventory.transform';
+import { InventoryCreateInput, OrderByArg, InventoryWhereInput } from '@prisma/client';
+import { FindSingleLocationInventoryDto } from './query/find-single-location/find-single-location-inventory.dto';
+import { findSingleLocationInventory, findSingleLocationInventoryTransform, findSingleLocationSelect, pagination, paginate } from './query/find-single-location/find-single-location-inventory.transform';
 
 @Controller('inventories')
 export class InventoriesController {
@@ -31,16 +33,45 @@ export class InventoriesController {
 
     @Get()
     async findAll(): Promise<responseInventory[]> {
-        return (await this.prismaService.inventory.findMany({
+        const inventories = await this.prismaService.inventory.findMany({
             take: 10,
             orderBy: {
                 id: OrderByArg.desc
             }
-        })).map(inventoryTransform);
+        });
+        return inventories.map(inventoryTransform);
     }
 
-    @Get('prisma')
-    async getInfo(): Promise<responseInventory[]> {
-        return (await this.prismaService.inventory.findMany()).map(inventoryTransform);
+    @Get('findSingleLocation')
+    async findSingleLocation(
+        @Query() findSingleLocationInventoryDto: FindSingleLocationInventoryDto
+    ): Promise<pagination<findSingleLocationInventory[]>> {
+        const inventoryFilter: InventoryWhereInput = {
+            product_id: findSingleLocationInventoryDto.productId,
+            location_id: findSingleLocationInventoryDto.locationId,
+        };
+
+        const take = 5;
+        const skip = findSingleLocationInventoryDto.pageNumber * take;
+
+        const inventories = await this.prismaService.inventory.findMany({
+            select: findSingleLocationSelect,
+            skip: skip,
+            take: take,
+            where: inventoryFilter,
+            orderBy: {
+                date: OrderByArg.desc,
+                // created_at: OrderByArg.desc,
+            },
+        });
+
+        const total = await this.prismaService.inventory.count({
+            where: inventoryFilter
+        });
+
+        return paginate<findSingleLocationInventory[]>(
+            inventories.map(findSingleLocationInventoryTransform),
+            total,
+        );
     }
 }

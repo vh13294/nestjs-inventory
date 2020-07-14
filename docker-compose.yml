@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysql-main:
+    container_name: nest_mysql
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=inventory-management
+    volumes:
+      - db-data:/var/lib/mysql:cached
+
+  mysql-test:
+    container_name: nest_test_mysql
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=testing
+
+volumes:
+  db-data:
