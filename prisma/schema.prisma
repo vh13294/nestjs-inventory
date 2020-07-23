@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  experimentalFeatures = ["aggregateApi"]
 }
 
 datasource db {

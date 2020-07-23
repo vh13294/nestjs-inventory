@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateInventoryDto } from './query/create/create-inventory.dto';
 import { responseInventory, inventoryTransform } from './query/create/inventory.transform';
-import { InventoryCreateInput, OrderByArg, InventoryWhereInput } from '@prisma/client';
+import { InventoryCreateInput, OrderByArg, InventoryWhereInput, InventoryOrderByInput } from '@prisma/client';
 import { FindSingleLocationInventoryDto } from './query/find-single-location/find-single-location-inventory.dto';
 import { findSingleLocationInventory, findSingleLocationInventoryTransform, findSingleLocationSelect, pagination, paginate } from './query/find-single-location/find-single-location-inventory.transform';
 
@@ -51,6 +51,11 @@ export class InventoriesController {
             location_id: findSingleLocationInventoryDto.locationId,
         };
 
+        const inventoryOrder: InventoryOrderByInput = {
+            // date: OrderByArg.desc,
+            created_at: OrderByArg.desc,
+        }
+
         const take = 5;
         const skip = findSingleLocationInventoryDto.pageNumber * take;
 
@@ -59,19 +64,24 @@ export class InventoriesController {
             skip: skip,
             take: take,
             where: inventoryFilter,
-            orderBy: {
-                date: OrderByArg.desc,
-                // created_at: OrderByArg.desc,
-            },
+            orderBy: inventoryOrder,
         });
 
-        const total = await this.prismaService.inventory.count({
-            where: inventoryFilter
+        const aggregated = await this.prismaService.inventory.aggregate({
+            where: inventoryFilter,
+            skip: skip,
+            orderBy: inventoryOrder,
+            count: true,
+            sum: {
+                quantity: true
+            }
         });
+
+        const inventoriesTransformed = findSingleLocationInventoryTransform(inventories, aggregated.sum.quantity);
 
         return paginate<findSingleLocationInventory[]>(
-            inventories.map(findSingleLocationInventoryTransform),
-            total,
+            inventoriesTransformed,
+            aggregated.count,
         );
     }
 }

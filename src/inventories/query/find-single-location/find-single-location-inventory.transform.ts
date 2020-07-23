@@ -1,4 +1,4 @@
-import { InventoryGetPayload, InventorySelect, Location, Product } from "@prisma/client";
+import { InventoryGetPayload, InventorySelect, Location, Product, Inventory } from "@prisma/client";
 
 export const findSingleLocationSelect: InventorySelect = {
     id: true,
@@ -55,16 +55,22 @@ export type findSingleLocationInventory = {
 }
 
 export function findSingleLocationInventoryTransform(
-    inventory: FindSingleLocationInventory,
-): findSingleLocationInventory {
-    return {
-        id: inventory.id,
-        quantity: inventory.quantity,
-        createdAt: inventory.created_at,
-        updatedAt: inventory.updated_at,
-        location: inventory.location,
-        product: inventory.product,
-    }
+    inventories: FindSingleLocationInventory[],
+    sum: number,
+): findSingleLocationInventory[] {
+    return inventories.map(inventory => {
+        const result = {
+            id: inventory.id,
+            quantity: inventory.quantity,
+            createdAt: inventory.created_at,
+            updatedAt: inventory.updated_at,
+            location: inventory.location,
+            product: inventory.product,
+            total: sum 
+        };
+        sum -= inventory.quantity;
+        return result;
+    })
 };
 
 export type pagination<T> = {
