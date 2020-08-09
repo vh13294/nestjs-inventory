@@ -1,8 +1,11 @@
-import { InventoryGetPayload, InventorySelect, Location, Product, Inventory } from "@prisma/client";
+import { InventoryGetPayload, InventorySelect } from "@prisma/client";
 
-export const findSingleLocationSelect: InventorySelect = {
+// todo type safe
+export const findSingleLocationSelect = {
     id: true,
     quantity: true,
+    created_at: true,
+    updated_at: true,
     product: {
         select: {
             id: true,
@@ -35,7 +38,7 @@ export const findSingleLocationSelect: InventorySelect = {
     },
 }
 
-type FindSingleLocationInventory = InventoryGetPayload<{
+type findSingleLocationSelectGen = InventoryGetPayload<{
     select: typeof findSingleLocationSelect
 }>
 
@@ -47,15 +50,21 @@ export type findSingleLocationInventory = {
     date?: Date
     deletedAt?: Date
     id: number
-    location: Location
-    product: Product
+    location: {
+        id: number,
+        name: string,
+    }
+    product: {
+        id: number,
+        name: string,
+    }
     quantity: number
     supplierId?: number
     updatedAt: Date
 }
 
 export function findSingleLocationInventoryTransform(
-    inventories: FindSingleLocationInventory[],
+    inventories: findSingleLocationSelectGen[],
     sum: number,
 ): findSingleLocationInventory[] {
     return inventories.map(inventory => {
@@ -72,15 +81,3 @@ export function findSingleLocationInventoryTransform(
         return result;
     })
 };
-
-export type pagination<T> = {
-    data: T,
-    total: number,
-}
-
-export function paginate<T>(data: T, total: number): pagination<T> {
-    return {
-        data: data,
-        total: total,
-    };
-}

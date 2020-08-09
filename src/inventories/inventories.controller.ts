@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateInventoryDto } from './query/create/create-inventory.dto';
-import { responseInventory, inventoryTransform } from './query/create/inventory.transform';
-import { InventoryCreateInput, OrderByArg, InventoryWhereInput, InventoryOrderByInput } from '@prisma/client';
-import { FindSingleLocationInventoryDto } from './query/find-single-location/find-single-location-inventory.dto';
-import { findSingleLocationInventory, findSingleLocationInventoryTransform, findSingleLocationSelect, pagination, paginate } from './query/find-single-location/find-single-location-inventory.transform';
+import { PrismaService, paginateWrapper } from 'src/prisma/prisma.service';
+import { CreateInventoryDto } from './services/create-inventory/create-inventory.dto';
+import { responseInventory, inventoryTransform } from './services/create-inventory/inventory.transform';
+import { InventoryCreateInput, SortOrder, InventoryWhereInput, InventoryOrderByInput } from '@prisma/client';
+import { FindSingleLocationInventoryDto } from './services/find-single-location/find-single-location-inventory.dto';
+import { findSingleLocationInventory, findSingleLocationInventoryTransform, findSingleLocationSelect } from './services/find-single-location/find-single-location-inventory.transform';
 
 @Controller('inventories')
 export class InventoriesController {
@@ -35,9 +35,11 @@ export class InventoriesController {
     async findAll(): Promise<responseInventory[]> {
         const inventories = await this.prismaService.inventory.findMany({
             take: 10,
-            orderBy: {
-                id: OrderByArg.desc
-            }
+            orderBy: [
+                {
+                    id: SortOrder.desc
+                }
+            ]
         });
         return inventories.map(inventoryTransform);
     }
@@ -45,16 +47,20 @@ export class InventoriesController {
     @Get('findSingleLocation')
     async findSingleLocation(
         @Query() findSingleLocationInventoryDto: FindSingleLocationInventoryDto
-    ): Promise<pagination<findSingleLocationInventory[]>> {
+    ): Promise<paginateWrapper<findSingleLocationInventory[]>> {
         const inventoryFilter: InventoryWhereInput = {
             product_id: findSingleLocationInventoryDto.productId,
             location_id: findSingleLocationInventoryDto.locationId,
         };
 
-        const inventoryOrder: InventoryOrderByInput = {
-            // date: OrderByArg.desc,
-            created_at: OrderByArg.desc,
-        }
+        const inventoryOrder: InventoryOrderByInput[] = [
+            {
+                date: SortOrder.desc
+            },
+            {
+                created_at: SortOrder.desc,
+            }
+        ]
 
         const take = 5;
         const skip = findSingleLocationInventoryDto.pageNumber * take;
@@ -79,7 +85,7 @@ export class InventoriesController {
 
         const inventoriesTransformed = findSingleLocationInventoryTransform(inventories, aggregated.sum.quantity);
 
-        return paginate<findSingleLocationInventory[]>(
+        return this.prismaService.paginate<findSingleLocationInventory[]>(
             inventoriesTransformed,
             aggregated.count,
         );
