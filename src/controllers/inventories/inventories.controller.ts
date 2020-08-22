@@ -1,8 +1,5 @@
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
-import { PrismaService, paginateWrapper } from 'src/prisma/prisma.service';
 import { CreateInventoryDto } from './services/create-inventory/create-inventory.dto';
-import { responseInventory, inventoryTransform } from './services/create-inventory/create-inventory.transform';
-import { InventoryCreateInput, SortOrder, InventoryWhereInput, InventoryOrderByInput } from '@prisma/client';
 import { FindSingleLocationInventoryDto } from './services/find-single-location/find-single-location-inventory.dto';
 import { FindSingleLocationService } from './services/find-single-location/find-single-location.service';
 import { CreateInventoryService } from './services/create-inventory/create-inventory.service';
