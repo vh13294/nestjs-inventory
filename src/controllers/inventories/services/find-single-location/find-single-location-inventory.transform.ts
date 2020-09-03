@@ -1,7 +1,14 @@
 import { InventoryGetPayload, InventorySelect } from "@prisma/client";
 
-// todo type safe
-export const findSingleLocationSelect = {
+type CheckSelectKeys<T, U> = {
+    [K in keyof T]: K extends keyof U ? T[K] : never;
+};
+
+const createInventorySelect = <T extends InventorySelect>(
+    arg: CheckSelectKeys<T, InventorySelect>
+) => arg;
+
+export const findSingleLocationSelect = createInventorySelect({
     id: true,
     quantity: true,
     created_at: true,
@@ -36,7 +43,7 @@ export const findSingleLocationSelect = {
             name: true,
         }
     },
-}
+})
 
 type findSingleLocationSelectGen = InventoryGetPayload<{
     select: typeof findSingleLocationSelect
@@ -75,7 +82,7 @@ export function findSingleLocationInventoryTransform(
             updatedAt: inventory.updated_at,
             location: inventory.location,
             product: inventory.product,
-            total: sum 
+            total: sum
         };
         sum -= inventory.quantity;
         return result;

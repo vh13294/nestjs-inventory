@@ -40,8 +40,8 @@ export class FindSingleLocationService {
         });
 
         const aggregated = await this.prismaService.inventory.aggregate({
-            where: inventoryFilter,
             skip: skip,
+            where: inventoryFilter,
             orderBy: inventoryOrder,
             count: true,
             sum: {
