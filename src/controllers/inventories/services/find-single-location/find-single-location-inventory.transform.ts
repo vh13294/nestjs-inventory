@@ -1,11 +1,7 @@
-import { InventoryGetPayload, InventorySelect } from "@prisma/client";
-
-type CheckSelectKeys<T, U> = {
-    [K in keyof T]: K extends keyof U ? T[K] : never;
-};
+import { InventoryGetPayload, InventorySelect, Subset } from "@prisma/client";
 
 const createInventorySelect = <T extends InventorySelect>(
-    arg: CheckSelectKeys<T, InventorySelect>
+    arg: Subset<T, InventorySelect>
 ) => arg;
 
 export const findSingleLocationSelect = createInventorySelect({
@@ -54,6 +50,7 @@ export type findSingleLocationInventory = {
     createdAt: Date
     createdBy?: number
     customerId?: number
+    supplierId?: number
     date?: Date
     deletedAt?: Date
     id: number
@@ -66,7 +63,6 @@ export type findSingleLocationInventory = {
         name: string,
     }
     quantity: number
-    supplierId?: number
     updatedAt: Date
 }
 

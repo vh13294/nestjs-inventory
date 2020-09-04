@@ -51,7 +51,7 @@ export class FindSingleLocationService {
 
         const inventoriesTransformed = findSingleLocationInventoryTransform(inventories, aggregated.sum.quantity);
 
-        return this.prismaService.paginate<findSingleLocationInventory[]>(
+        return this.prismaService.paginate(
             inventoriesTransformed,
             aggregated.count,
         );
