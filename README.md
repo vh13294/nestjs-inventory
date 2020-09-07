@@ -65,3 +65,12 @@ npx prisma introspect // after database schema changes
 
 npm install @prisma/client
 npx prisma generate // after database schema changes
+
+## Update
+npm update (include cli)
+<!-- npx @nestjs/cli update -->
+npx nest update
+npx nest update -f -t latest
+npx nest info
+npm outdated
+npx npm-check-updates -u

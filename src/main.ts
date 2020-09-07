@@ -26,6 +26,7 @@ function initSwagger(app: INestApplication) {
 }
 
 function initPipes(app: INestApplication) {
+  // for DTO and params auto validate
   app.useGlobalPipes(
     new ValidationPipe({
       disableErrorMessages: process.env.NODE_ENV === 'production',
