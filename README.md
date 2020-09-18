@@ -69,8 +69,8 @@ npx prisma generate // after database schema changes
 ## Update
 npm update (include cli)
 <!-- npx @nestjs/cli update -->
-npx nest update
-npx nest update -f -t latest
+npx nest update <!-- local -->
+npx nest update -f -t latest <!-- local -->
 npx nest info
 npm outdated
 npx npm-check-updates -u
