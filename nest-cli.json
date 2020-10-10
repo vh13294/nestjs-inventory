@@ -6,7 +6,7 @@
       {
         "name": "@nestjs/swagger/plugin",
         "options": {
-          "classValidatorShim": false,
+          "classValidatorShim": true,
           "dtoFileNameSuffix": "dto"
         }
       }

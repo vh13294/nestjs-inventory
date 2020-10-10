@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsInt } from 'class-validator';
 import { Transform } from 'class-transformer';
-import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class FindSingleLocationInventoryDto {
     @Transform(value => parseInt(value))
@@ -16,6 +15,5 @@ export class FindSingleLocationInventoryDto {
     // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     @Transform(value => parseInt(value))
     @IsInt()
-    @ApiPropertyOptional()
-    pageNumber: number = 0;
+    pageNumber?: number = 0;
 }
