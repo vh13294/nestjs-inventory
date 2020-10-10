@@ -74,3 +74,6 @@ npx nest update -f -t latest <!-- local -->
 npx nest info
 npm outdated
 npx npm-check-updates -u
+
+## Docker
+docker-compose up -d
