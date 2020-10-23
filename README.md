@@ -30,9 +30,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-
-## Extra
-
 ## Swagger
 
 npm install --save @nestjs/swagger swagger-ui-express
@@ -66,6 +63,7 @@ npx prisma introspect // after database schema changes
 npm install @prisma/client
 npx prisma generate // after database schema changes
 
+
 ## Update
 npm update (include cli)
 <!-- npx @nestjs/cli update -->
@@ -75,5 +73,10 @@ npx nest info
 npm outdated
 npx npm-check-updates -u
 
+
 ## Docker
 docker-compose up -d
+
+
+## Todo
+add db migration & seeder
