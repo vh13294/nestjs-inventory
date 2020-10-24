@@ -1,13 +1,12 @@
 import { ApplicationConfig } from '@nestjs/core';
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { PATH_METADATA } from '@nestjs/common/constants';
 import { Controller } from '@nestjs/common/interfaces/controllers/controller.interface';
 
 import { SignedUrlModuleOptions } from './signed-url-options.interface';
 import { SIGNED_URL_MODULE_OPTIONS } from './signed-url.constants';
 
-import { createHmac } from 'crypto';
 import { stringify as stringifyParams, ParsedUrlQueryInput } from 'querystring';
+import { appendParams, generateHmac, getControllerMethodRoute, joinRoutes } from './helpers';
 
 @Injectable()
 export class SignedUrlService {
@@ -24,41 +23,56 @@ export class SignedUrlService {
         }
     }
 
-    public signedRoute(
+    public signedControllerRoute(
         controller: Controller,
         controllerMethod: unknown,
         expirationDate: Date,
-        params?: ParsedUrlQueryInput,
+        params: ParsedUrlQueryInput = {},
+    ): string {
+        const controllerMethodFullRoute = getControllerMethodRoute(controller, controllerMethod)
+
+        return this.signedRelativePathUrl(
+            controllerMethodFullRoute,
+            expirationDate,
+            params
+        )
+    }
+
+    public signedRelativePathUrl(
+        relativePath: string,
+        expirationDate: Date,
+        params: ParsedUrlQueryInput = {},
     ): string {
         const prefix = this.applicationConfig.getGlobalPrefix()
-        const controllerMethodFullRoute = this.getControllerMethodRoute(controller, controllerMethod)
-        const paramsStr = stringifyParams(params)
+        params['expirationDate'] = expirationDate.toISOString()
 
-        expirationDate.toISOString()
+        const generateURL = () => appendParams(
+            joinRoutes(
+                this.signedUrlModuleOptions.appUrl,
+                prefix,
+                relativePath,
+            ),
+            stringifyParams(params)
+        )
 
-        return this.joinRoutes(this.signedUrlModuleOptions.appUrl, prefix, controllerMethodFullRoute, paramsStr)
+        const urlWithoutHash = generateURL()
+        const hmac = generateHmac(urlWithoutHash, this.signedUrlModuleOptions.secret)
+        params['signed'] = hmac
+        const urlWithHash = generateURL()
+
+        return urlWithHash
     }
 
-    private getControllerMethodRoute(
-        controller: Controller,
-        controllerMethod: unknown,
-    ): string {
-        const controllerRoute = Reflect.getMetadata(PATH_METADATA, controller)
-        const methodRoute = Reflect.getMetadata(PATH_METADATA, controllerMethod)
-        return this.joinRoutes(controllerRoute, methodRoute)
+    public isSignatureValid(): boolean {
+        return this.isSignatureEqual()
+            && this.hasSignatureNotExpired();
     }
 
-    private isRouteNotEmpty(route: string):boolean {
-        return (route && route !== '/')
+    private isSignatureEqual() {
+        return true
     }
 
-    private joinRoutes(...routes: string[]): string {
-        return routes.filter(route => this.isRouteNotEmpty(route)).join('/')
-    }
-
-    private createHmac(url: string): string {
-        const hmac = createHmac('sha256', this.signedUrlModuleOptions.secret)
-        hmac.update(url, 'utf8')
-        return hmac.digest('hex')
+    private hasSignatureNotExpired() {
+        return true
     }
 }

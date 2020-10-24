@@ -3,12 +3,12 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 
+// you can bootstrap multiple modules to have nested routes
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('v1');
   initSwagger(app);
   initPipes(app);
-  app.setGlobalPrefix('v1');
-  // you can bootstrap multiple modules to have nested routes
   await app.listen(3000);
 }
 
