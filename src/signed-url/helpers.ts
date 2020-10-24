@@ -2,6 +2,7 @@ import { createHmac, timingSafeEqual } from 'crypto';
 import { PATH_METADATA } from '@nestjs/common/constants';
 import { Controller } from '@nestjs/common/interfaces/controllers/controller.interface';
 import { UnauthorizedException } from '@nestjs/common';
+import { RESERVED_PARAM_NAMES } from './signed-url.constants';
 
 export function getControllerMethodRoute(
     controller: Controller,
@@ -40,4 +41,9 @@ export function isSignatureEqual(signed: string, hmacValue: string): boolean {
 export function signatureHasNotExpired(expiryDate: Date): boolean {
     const currentDate = new Date()
     return (expiryDate > currentDate)
+}
+
+export function checkIfParamsHasReservedKeys(params: Record<string, string>): boolean {
+    const keyArr = Object.keys(params)
+    return RESERVED_PARAM_NAMES.some(r => keyArr.includes(r))
 }

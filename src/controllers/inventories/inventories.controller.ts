@@ -47,7 +47,8 @@ export class InventoriesController {
     async testSignedUrl(): Promise<string> {
         const params = {
             id: 1,
-            reset: false
+            reset: false,
+            signed: 2,
         }
         const signedUrl = this.signedUrlService.signedControllerRoute(
             InventoriesController,
