@@ -2,6 +2,7 @@ import { ModuleMetadata, Type } from "@nestjs/common";
 
 export interface SignedUrlModuleOptions {
     secret: string;
+    appUrl: string;
 }
 
 export interface SignedUrlAsyncModuleOptions extends Pick<ModuleMetadata, 'imports'> {

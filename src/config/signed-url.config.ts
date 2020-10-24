@@ -2,6 +2,7 @@ import { SignedUrlModuleOptions } from "src/signed-url/signed-url-options.interf
 
 export function signedUrlModuleConfig(): SignedUrlModuleOptions {
     return {
-        secret: process.env.APP_KEY
+        secret: process.env.APP_KEY,
+        appUrl: process.env.APP_URL,
     }
 };

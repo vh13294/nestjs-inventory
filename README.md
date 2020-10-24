@@ -34,7 +34,8 @@ $ npm run test:cov
 
 npm install --save @nestjs/swagger swagger-ui-express
 
-npm run build to generate DTO
+-To generate DTO
+npm run build
 https://docs.nestjs.com/openapi/cli-plugin
 
 http://localhost:3000/api
@@ -80,3 +81,9 @@ docker-compose up -d
 
 ## Todo
 add db migration & seeder
+
+
+## Signed Url
+changing the key cause invalidate all urls
+add dayjs example
+write unit test to check for specific import lib might cause error

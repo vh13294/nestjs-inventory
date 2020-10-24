@@ -5,10 +5,10 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   initSwagger(app);
   initPipes(app);
-
+  app.setGlobalPrefix('v1');
+  // you can bootstrap multiple modules to have nested routes
   await app.listen(3000);
 }
 
