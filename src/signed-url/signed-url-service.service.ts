@@ -45,7 +45,7 @@ export class SignedUrlService {
         params: ParsedUrlQueryInput = {},
     ): string {
         const prefix = this.applicationConfig.getGlobalPrefix()
-        params['expirationDate'] = expirationDate.toISOString()
+        params.expirationDate = expirationDate.toISOString()
 
         const generateURL = () => appendParams(
             joinRoutes(
@@ -58,7 +58,7 @@ export class SignedUrlService {
 
         const urlWithoutHash = generateURL()
         const hmac = generateHmac(urlWithoutHash, this.signedUrlModuleOptions.secret)
-        params['signed'] = hmac
+        params.signed = hmac
         const urlWithHash = generateURL()
 
         return urlWithHash
