@@ -1,6 +1,7 @@
-import { createHmac } from 'crypto';
+import { createHmac, timingSafeEqual } from 'crypto';
 import { PATH_METADATA } from '@nestjs/common/constants';
 import { Controller } from '@nestjs/common/interfaces/controllers/controller.interface';
+import { UnauthorizedException } from '@nestjs/common';
 
 export function getControllerMethodRoute(
     controller: Controller,
@@ -27,4 +28,16 @@ export function generateHmac(url: string, secret: string): string {
     const hmac = createHmac('sha256', secret)
     hmac.update(url, 'utf8')
     return hmac.digest('hex')
+}
+
+export function isSignatureEqual(signed: string, hmacValue: string): boolean {
+    if (!signed || !hmacValue) {
+        throw new UnauthorizedException()
+    }
+    return timingSafeEqual(Buffer.from(signed), Buffer.from(hmacValue))
+}
+
+export function signatureHasNotExpired(expiryDate: Date): boolean {
+    const currentDate = new Date()
+    return (expiryDate > currentDate)
 }

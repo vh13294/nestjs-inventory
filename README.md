@@ -87,4 +87,4 @@ add db migration & seeder
 changing the key cause invalidate all urls
 add dayjs example
 write unit test to check for specific import lib might cause error
-add verity signed url middleware
+write doc, unsubscribe email, email verification, sign file permission 
