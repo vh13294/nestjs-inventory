@@ -81,10 +81,3 @@ docker-compose up -d
 
 ## Todo
 add db migration & seeder
-
-
-## Signed Url
-changing the key cause invalidate all urls
-add dayjs example
-write unit test to check for specific import lib might cause error
-write doc, unsubscribe email, email verification, sign file permission 

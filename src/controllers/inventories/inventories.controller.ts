@@ -6,8 +6,8 @@ import { FindSingleLocationService } from './services/find-single-location/find-
 import { CreateInventoryService } from './services/create-inventory/create-inventory.service';
 import { FindAllService } from './services/find-all/find-all.service';
 
-import { SignedUrlService } from 'src/signed-url/signed-url-service.service';
-import { SignedUrlGuard } from 'src/signed-url/signed-url-guard';
+import { SignedUrlService } from 'nestjs-signed-url';
+import { SignedUrlGuard } from 'nestjs-signed-url';
 
 @Controller('inventories')
 export class InventoriesController {
@@ -48,7 +48,7 @@ export class InventoriesController {
         const params = {
             id: 1,
             reset: false,
-            signed: 2,
+            // signed: 'test'
         }
         const signedUrl = this.signedUrlService.signedControllerRoute(
             InventoriesController,

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { SignedUrlModule } from 'src/signed-url/signed-url.module';
+import { SignedUrlModule } from 'nestjs-signed-url';
 import { signedUrlModuleConfig } from 'src/config/signed-url.config';
 
 import { InventoriesController } from './inventories.controller';

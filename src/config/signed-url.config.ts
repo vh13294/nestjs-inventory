@@ -1,4 +1,4 @@
-import { SignedUrlModuleOptions } from "src/signed-url/signed-url-options.interface";
+import { SignedUrlModuleOptions } from 'nestjs-signed-url';
 
 export function signedUrlModuleConfig(): SignedUrlModuleOptions {
     return {
