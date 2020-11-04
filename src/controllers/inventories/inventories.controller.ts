@@ -6,12 +6,9 @@ import { FindSingleLocationService } from './services/find-single-location/find-
 import { CreateInventoryService } from './services/create-inventory/create-inventory.service';
 import { FindAllService } from './services/find-all/find-all.service';
 
-import { SignedUrlService } from 'nestjs-signed-url';
-
 @Controller('inventories')
 export class InventoriesController {
     constructor(
-        private readonly signedUrlService: SignedUrlService,
         private readonly findAllService: FindAllService,
         private readonly createInventoryService: CreateInventoryService,
         private readonly findSingleLocationService: FindSingleLocationService
