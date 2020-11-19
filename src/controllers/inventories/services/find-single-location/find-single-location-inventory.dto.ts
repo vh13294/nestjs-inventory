@@ -12,8 +12,7 @@ export class FindSingleLocationInventoryDto {
     @IsNotEmpty()
     productId: number;
 
-    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     @Transform(value => parseInt(value))
     @IsInt()
-    pageNumber?: number = 0;
+    pageNumber = 0;
 }
