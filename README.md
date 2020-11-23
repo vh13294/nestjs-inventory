@@ -52,17 +52,30 @@ npx nest g service inventories
 npm i --save @nestjs/config
 
 
-## TypeORM
-npm install --save @nestjs/typeorm typeorm mysql
-
-
 ## PRISMA
 npm install @prisma/cli --save-dev
-npx prisma init
-npx prisma introspect // after database schema changes
-
 npm install @prisma/client
+
+npx prisma init
+
+npx prisma introspect // after database schema changes
 npx prisma generate // after database schema changes
+
+# Migration
+npx prisma db push // during development
+
+npx prisma migrate save
+npx prisma migrate save --preview
+npx prisma migrate save --name "First migration"
+
+npx prisma migrate up
+npx prisma migrate up --preview
+npx prisma migrate up "First migration"
+npx prisma migrate up 20200223181448 // Apply all migrations necessary up to
+// also apply to down
+
+## Seeder
+npm run seeder
 
 
 ## Update

@@ -4,6 +4,7 @@
         "dtos",
         "nestjs",
         "typeorm",
+        "upsert",
         "varchar"
     ],
     "files.watcherExclude": {
