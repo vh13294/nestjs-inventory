@@ -77,6 +77,8 @@ npx prisma migrate up 20200223181448 // Apply all migrations necessary up to
 ## Seeder
 npm run seeder
 
+npm install chance --save-dev
+npm install @types/chance --save-dev
 
 ## Update
 npm update (include cli)

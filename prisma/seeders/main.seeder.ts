@@ -1,12 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 
 import { customerSeeder } from './script/customer.seeder'
+import { inventorySeeder } from './script/inventory.seeder'
 import { locationSeeder } from './script/location.seeder'
 import { productSeeder } from './script/product.seeder'
 import { supplierSeeder } from './script/supplier.seeder'
 import { userSeeder } from './script/user.seeder'
 
 async function main() {
+    console.time()
     const prisma = new PrismaClient()
 
     await Promise.all([
@@ -15,10 +17,12 @@ async function main() {
         productSeeder(prisma),
         supplierSeeder(prisma),
         userSeeder(prisma),
+        inventorySeeder(prisma)
     ]).catch(console.error)
 
     await prisma.$disconnect()
     console.log('Seeders generated')
+    console.timeEnd()
 };
 
 main()
