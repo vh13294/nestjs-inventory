@@ -11,13 +11,18 @@ async function main() {
     console.time()
     const prisma = new PrismaClient()
 
+    // static data
     await Promise.all([
         customerSeeder(prisma),
         locationSeeder(prisma),
         productSeeder(prisma),
         supplierSeeder(prisma),
         userSeeder(prisma),
-        inventorySeeder(prisma)
+    ]).catch(console.error)
+
+    // dynamic data
+    await Promise.all([
+        inventorySeeder(prisma),
     ]).catch(console.error)
 
     await prisma.$disconnect()

@@ -61,6 +61,10 @@ npx prisma init
 npx prisma introspect // after database schema changes
 npx prisma generate // after database schema changes
 
+npx prisma studio
+
+npx @prisma/codemods update-2.12 ./  // automatically update
+
 # Migration
 npx prisma db push // during development
 
@@ -77,8 +81,8 @@ npx prisma migrate up 20200223181448 // Apply all migrations necessary up to
 ## Seeder
 npm run seeder
 
-npm install chance --save-dev
-npm install @types/chance --save-dev
+npm install faker --save-dev
+npm install @types/faker --save-dev
 
 ## Update
 npm update (include cli)
