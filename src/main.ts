@@ -34,6 +34,9 @@ function initPipes(app: INestApplication) {
     new ValidationPipe({
       disableErrorMessages: process.env.NODE_ENV === 'production',
       transform: true,
+      skipNullProperties: true,
+      skipMissingProperties: true,
+      skipUndefinedProperties: true,
     }),
   );
 }

@@ -40,6 +40,7 @@ https://docs.nestjs.com/openapi/cli-plugin
 
 http://localhost:3000/api
 
+do not transform before validation
 
 ## Generator
 npx nest generate --help

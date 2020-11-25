@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService, paginateWrapper } from 'src/prisma/prisma.service';
 import { SortOrder, InventoryWhereInput, InventoryOrderByInput } from '@prisma/client';
-import { FindSingleLocationInventoryDto } from './find-single-location-inventory.dto';
+import { FindSingleLocationInventoryParams } from './find-single-location-inventory.params';
 import { findSingleLocationInventory, findSingleLocationInventoryTransform, findSingleLocationSelect } from './find-single-location-inventory.transform';
+import { parseIntDefaultZero, parseIntWithThrow } from 'src/helpers/utilities';
 
 @Injectable()
 export class FindSingleLocationService {
@@ -11,12 +12,12 @@ export class FindSingleLocationService {
     ) { }
 
     async findSingleLocation(
-        findSingleLocationInventoryDto: FindSingleLocationInventoryDto
+        findSingleLocationInventoryParams: FindSingleLocationInventoryParams
     ): Promise<paginateWrapper<findSingleLocationInventory[]>> {
 
         const inventoryFilter: InventoryWhereInput = {
-            product_id: findSingleLocationInventoryDto.productId,
-            location_id: findSingleLocationInventoryDto.locationId,
+            product_id: parseIntWithThrow(findSingleLocationInventoryParams.productId),
+            location_id: parseIntWithThrow(findSingleLocationInventoryParams.locationId),
         };
 
         const inventoryOrder: InventoryOrderByInput[] = [
@@ -29,31 +30,35 @@ export class FindSingleLocationService {
         ]
 
         const take = 5;
-        const skip = findSingleLocationInventoryDto.pageNumber * take;
+        const skip = parseIntDefaultZero(findSingleLocationInventoryParams.pageNumber) * take;
 
-        const inventories = await this.prismaService.inventory.findMany({
-            select: findSingleLocationSelect,
-            skip: skip,
-            take: take,
-            where: inventoryFilter,
-            orderBy: inventoryOrder,
-        });
-
-        const aggregated = await this.prismaService.inventory.aggregate({
-            skip: skip,
-            where: inventoryFilter,
-            orderBy: inventoryOrder,
-            count: true,
-            sum: {
-                quantity: true
-            }
-        });
-
-        const inventoriesTransformed = findSingleLocationInventoryTransform(inventories, aggregated.sum.quantity);
-
-        return this.prismaService.paginate(
-            inventoriesTransformed,
-            aggregated.count,
-        );
+        try {
+            const inventories = await this.prismaService.inventory.findMany({
+                select: findSingleLocationSelect,
+                skip: skip,
+                take: take,
+                where: inventoryFilter,
+                orderBy: inventoryOrder,
+            })
+    
+            const aggregated = await this.prismaService.inventory.aggregate({
+                skip: skip,
+                where: inventoryFilter,
+                orderBy: inventoryOrder,
+                count: true,
+                sum: {
+                    quantity: true
+                }
+            })
+    
+            const inventoriesTransformed = findSingleLocationInventoryTransform(inventories, aggregated.sum.quantity);
+    
+            return this.prismaService.paginate(
+                inventoriesTransformed,
+                aggregated.count,
+            )
+        } catch (error) {
+            throw new BadRequestException(error.message)
+        }
     }
 }

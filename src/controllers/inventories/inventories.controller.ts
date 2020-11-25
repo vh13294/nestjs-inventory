@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 
 import { CreateInventoryDto } from './services/create-inventory/create-inventory.dto';
-import { FindSingleLocationInventoryDto } from './services/find-single-location/find-single-location-inventory.dto';
+import { FindSingleLocationInventoryParams } from './services/find-single-location/find-single-location-inventory.params';
 import { FindSingleLocationService } from './services/find-single-location/find-single-location.service';
 import { CreateInventoryService } from './services/create-inventory/create-inventory.service';
 import { FindAllService } from './services/find-all/find-all.service';
@@ -28,7 +28,7 @@ export class InventoriesController {
 
     @Get('findSingleLocation')
     async findSingleLocation(
-        @Query() findSingleLocationInventoryDto: FindSingleLocationInventoryDto
+        @Query() findSingleLocationInventoryDto: FindSingleLocationInventoryParams
     ): ReturnType<FindSingleLocationService['findSingleLocation']> {
         return this.findSingleLocationService.findSingleLocation(findSingleLocationInventoryDto);
     }
