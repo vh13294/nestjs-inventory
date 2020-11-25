@@ -1,8 +1,6 @@
-import { InventoryGetPayload, InventorySelect, Subset } from "@prisma/client";
+import { Prisma, InventorySelect, Subset } from "@prisma/client";
 
-const createInventorySelect = <T extends InventorySelect>(
-    arg: Subset<T, InventorySelect>
-) => arg;
+const createInventorySelect = <T extends InventorySelect>(arg: Subset<T, InventorySelect>) => arg;
 
 export const findSingleLocationSelect = createInventorySelect({
     id: true,
@@ -41,7 +39,7 @@ export const findSingleLocationSelect = createInventorySelect({
     },
 })
 
-type findSingleLocationSelectGen = InventoryGetPayload<{
+type findSingleLocationSelectGen = Prisma.InventoryGetPayload<{
     select: typeof findSingleLocationSelect
 }>
 
