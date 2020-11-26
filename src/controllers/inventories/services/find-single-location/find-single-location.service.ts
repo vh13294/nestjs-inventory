@@ -3,7 +3,6 @@ import { PrismaService, paginateWrapper } from 'src/prisma/prisma.service';
 import { SortOrder, InventoryWhereInput, InventoryOrderByInput } from '@prisma/client';
 import { FindSingleLocationInventoryParams } from './find-single-location-inventory.params';
 import { findSingleLocationInventory, findSingleLocationInventoryTransform, findSingleLocationSelect } from './find-single-location-inventory.transform';
-import { parseIntDefaultZero, parseIntWithThrow } from 'src/helpers/utilities';
 
 @Injectable()
 export class FindSingleLocationService {
@@ -16,8 +15,8 @@ export class FindSingleLocationService {
     ): Promise<paginateWrapper<findSingleLocationInventory[]>> {
 
         const inventoryFilter: InventoryWhereInput = {
-            product_id: parseIntWithThrow(findSingleLocationInventoryParams.productId),
-            location_id: parseIntWithThrow(findSingleLocationInventoryParams.locationId),
+            product_id: findSingleLocationInventoryParams.productId,
+            location_id: findSingleLocationInventoryParams.locationId,
         };
 
         const inventoryOrder: InventoryOrderByInput[] = [
@@ -30,7 +29,7 @@ export class FindSingleLocationService {
         ]
 
         const take = 5;
-        const skip = parseIntDefaultZero(findSingleLocationInventoryParams.pageNumber) * take;
+        const skip = findSingleLocationInventoryParams.pageNumber * take;
 
         try {
             const inventories = await this.prismaService.inventory.findMany({

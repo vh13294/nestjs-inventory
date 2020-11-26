@@ -1,18 +1,15 @@
-import { BadRequestException } from "@nestjs/common"
 import { ValidateIf, ValidationOptions } from "class-validator";
 
-export function parseIntWithThrow(input: string): number {
+export function parseIntNoModification(input: string): any {
     const parsedInput = parseInt(input)
-    if(isNaN(parsedInput)) {
-        throw new BadRequestException('Invalid Integer')
-    }
-    return parsedInput
-}
-
-export function parseIntDefaultZero(input: string): number {
-    const parsedInput = parseInt(input)
-    if(isNaN(parsedInput)) {
-        return 0
+    if (isNaN(parsedInput)) {
+        // new ValidationPipe({
+        //     skipNullProperties: true,
+        //     skipMissingProperties: true,
+        //     skipUndefinedProperties: true,
+        //   }),
+        if (input === '') return null // avoid validation
+        return input
     }
     return parsedInput
 }
