@@ -1,21 +1,16 @@
 import { ValidateIf, ValidationOptions } from "class-validator";
 
-export function parseIntNoModification(input: string): any {
-    const parsedInput = parseInt(input)
-    if (isNaN(parsedInput)) {
-        // new ValidationPipe({
-        //     skipNullProperties: true,
-        //     skipMissingProperties: true,
-        //     skipUndefinedProperties: true,
-        //   }),
-        if (input === '') return null // avoid validation
-        return input
-    }
-    return parsedInput
+export function parseIntParams(input: string): any {
+  const digitWithSign = /^[-+]?\d+$/
+  // if not a valid integer(+/-) return without modification
+  if (!digitWithSign.test(input))
+    return input
+
+  return parseInt(input, 10)
 }
 
-export function SkipEmptyString(options?: ValidationOptions): PropertyDecorator {
-    return function SkipEmptyStringDecorator(prototype: unknown, propertyKey: string | symbol): void {
-        ValidateIf((obj): boolean => obj[propertyKey] !== '', options)(prototype, propertyKey);
-    };
+export function IsOptional(options?: ValidationOptions): PropertyDecorator {
+  return ValidateIf((obj, value) => {
+    return value !== null && value !== undefined && value !== '';
+  }, options);
 }

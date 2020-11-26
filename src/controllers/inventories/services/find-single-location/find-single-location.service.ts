@@ -14,6 +14,8 @@ export class FindSingleLocationService {
         findSingleLocationInventoryParams: FindSingleLocationInventoryParams
     ): Promise<paginateWrapper<findSingleLocationInventory[]>> {
 
+        console.log(findSingleLocationInventoryParams)
+
         const inventoryFilter: InventoryWhereInput = {
             product_id: findSingleLocationInventoryParams.productId,
             location_id: findSingleLocationInventoryParams.locationId,

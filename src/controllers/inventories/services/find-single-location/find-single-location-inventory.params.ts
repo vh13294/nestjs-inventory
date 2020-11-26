@@ -1,20 +1,22 @@
 import { IsInt, IsPositive, Min } from 'class-validator';
-import { parseIntNoModification } from 'src/helpers/utilities';
+import { IsOptional, parseIntParams } from 'src/helpers/utilities';
 import { Transform } from 'class-transformer';
 
 // any params come in are default as string
 export class FindSingleLocationInventoryParams {
-    @Transform(value => parseInt(value))
+    @Transform(value => parseIntParams(value))
     @IsInt()
     @IsPositive()
     locationId: number;
 
-    @Transform(value => parseInt(value))
+    @Transform(value => parseIntParams(value))
     @IsInt()
     @IsPositive()
     productId: number;
 
-    @Transform(value => parseIntNoModification(value))
+    // todo if provide empty string, default value 0 will be ignored => ''
+    @Transform(value => parseIntParams(value))
+    @IsOptional()
     @IsInt()
     @Min(0)
     pageNumber = 0;
