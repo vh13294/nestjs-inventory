@@ -16,4 +16,4 @@ import { FindAllService } from './services/find-all/find-all.service';
     FindSingleLocationService,
   ],
 })
-export class InventoriesModule { }
+export class InventoriesModule {}

@@ -11,5 +11,4 @@ import { InventoriesModule } from './controllers/inventories/inventories.module'
     InventoriesModule,
   ],
 })
-export class AppModule { }
-
+export class AppModule {}

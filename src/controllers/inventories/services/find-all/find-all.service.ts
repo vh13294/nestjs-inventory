@@ -5,25 +5,23 @@ import { SortOrder } from '@prisma/client';
 
 @Injectable()
 export class FindAllService {
-    constructor(
-        private readonly prismaService: PrismaService
-    ) { }
+  constructor(private readonly prismaService: PrismaService) {}
 
-    async findAll(): Promise<responseInventory[]> {
-        const inventories = await this.prismaService.inventory.findMany({
-            take: 10,
-            orderBy: [
-                {
-                    id: SortOrder.desc
-                }
-            ]
-        });
-        return inventories.map(inventoryTransform);
-    }
+  async findAll(): Promise<responseInventory[]> {
+    const inventories = await this.prismaService.inventory.findMany({
+      take: 10,
+      orderBy: [
+        {
+          id: SortOrder.desc,
+        },
+      ],
+    });
+    return inventories.map(inventoryTransform);
+  }
 
-    async testRaw(): Promise<unknown> {
-        return this.prismaService.$queryRaw
-        `select products.id                                  as product_id,
+  async testRaw(): Promise<unknown> {
+    return this.prismaService
+      .$queryRaw`select products.id                                  as product_id,
                 CONCAT(products.name, ' - ', products.khmer) as product_name,
                 groupByPrice.id                              as price_id,
                 CONCAT(units.amount, ' - ', units.unit)      as unit_name,
@@ -51,5 +49,5 @@ export class FindAllService {
         
         where products.status = 'active'
         order by products.name asc`;
-    }
+  }
 }

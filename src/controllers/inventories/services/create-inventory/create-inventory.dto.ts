@@ -1,18 +1,18 @@
 import { IsInt, IsDateString } from 'class-validator';
 
 export class CreateInventoryDto {
-    @IsInt()
-    quantity: number;
+  @IsInt()
+  quantity: number;
 
-    @IsDateString()
-    date: Date;
+  @IsDateString()
+  date: Date;
 
-    @IsInt()
-    userId: number;
+  @IsInt()
+  userId: number;
 
-    @IsInt()
-    locationId: number;
+  @IsInt()
+  locationId: number;
 
-    @IsInt()
-    productId: number;
+  @IsInt()
+  productId: number;
 }
