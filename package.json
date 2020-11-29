@@ -18,7 +18,14 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop ecosystem.config.js",
+    "pm2:restart": "pm2 restart ecosystem.config.js",
+    "pm2:reload": "pm2 reload ecosystem.config.js",
+    "pm2:monit": "pm2 monit",
+    "pm2:delete": "pm2 delete all",
+    "pm2:flush": "rm -rf ./log/*"
   },
   "dependencies": {
     "@nestjs/common": "^7.5.5",
@@ -49,6 +56,7 @@
     "eslint-plugin-import": "^2.22.1",
     "faker": "^5.1.0",
     "jest": "^26.6.3",
+    "pm2": "^4.5.0",
     "prettier": "^2.2.1",
     "rxjs": "^6.6.3",
     "supertest": "^6.0.1",

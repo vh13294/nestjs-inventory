@@ -1,15 +1,26 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import {
+  INestApplication,
+  NestApplicationOptions,
+  ValidationPipe,
+} from '@nestjs/common';
 
 // you can bootstrap multiple modules to have nested routes
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, getOptions());
   setGlobalPrefix(app);
   initSwagger(app);
   initPipes(app);
   await app.listen(3000);
+}
+
+function getOptions() {
+  const options: NestApplicationOptions = {
+    logger: ['error', 'warn'],
+  };
+  return process.env.NODE_ENV === 'production' ? options : {};
 }
 
 function setGlobalPrefix(app: INestApplication) {

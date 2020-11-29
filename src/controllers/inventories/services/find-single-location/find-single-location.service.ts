@@ -1,10 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService, paginateWrapper } from 'src/prisma/prisma.service';
-import {
-  SortOrder,
-  InventoryWhereInput,
-  InventoryOrderByInput,
-} from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { FindSingleLocationInventoryParams } from './find-single-location-inventory.params';
 import {
   findSingleLocationInventory,
@@ -21,17 +17,17 @@ export class FindSingleLocationService {
   ): Promise<paginateWrapper<findSingleLocationInventory[]>> {
     console.log(findSingleLocationInventoryParams);
 
-    const inventoryFilter: InventoryWhereInput = {
+    const inventoryFilter: Prisma.InventoryWhereInput = {
       product_id: findSingleLocationInventoryParams.productId,
       location_id: findSingleLocationInventoryParams.locationId,
     };
 
-    const inventoryOrder: InventoryOrderByInput[] = [
+    const inventoryOrder: Prisma.InventoryOrderByInput[] = [
       {
-        date: SortOrder.desc,
+        date: Prisma.SortOrder.desc,
       },
       {
-        created_at: SortOrder.desc,
+        created_at: Prisma.SortOrder.desc,
       },
     ];
 

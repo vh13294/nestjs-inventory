@@ -5,7 +5,7 @@ import {
   responseInventory,
   inventoryTransform,
 } from './create-inventory.transform';
-import { InventoryUncheckedCreateInput } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class CreateInventoryService {
@@ -14,7 +14,7 @@ export class CreateInventoryService {
   async createInventory(
     createInventoryDto: CreateInventoryDto,
   ): Promise<responseInventory> {
-    const data: InventoryUncheckedCreateInput = {
+    const data: Prisma.InventoryUncheckedCreateInput = {
       date: createInventoryDto.date,
       quantity: createInventoryDto.quantity,
       created_by: createInventoryDto.userId,

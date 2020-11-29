@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { responseInventory, inventoryTransform } from './find-all.transform';
-import { SortOrder } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class FindAllService {
@@ -12,7 +12,7 @@ export class FindAllService {
       take: 10,
       orderBy: [
         {
-          id: SortOrder.desc,
+          id: Prisma.SortOrder.desc,
         },
       ],
     });

@@ -40,7 +40,7 @@ https://docs.nestjs.com/openapi/cli-plugin
 
 http://localhost:3000/api
 
-do not transform before validation
+
 
 ## Generator
 npx nest generate --help
@@ -51,6 +51,8 @@ npx nest g service inventories
 
 ## ENV
 npm i --save @nestjs/config
+
+
 
 
 ## PRISMA
@@ -89,11 +91,12 @@ npm run seeder
 npm install faker --save-dev
 npm install @types/faker --save-dev
 
+
+
+
 ## Update
 npm update (include cli)
 <!-- npx @nestjs/cli update -->
-npx nest update <!-- local -->
-npx nest update -f -t latest <!-- local -->
 npx nest info
 npm outdated
 npx npm-check-updates -u
@@ -102,6 +105,9 @@ npx npm-check-updates -u
 ## Docker
 docker-compose up -d
 
+
+## PM2
+npm i -D pm2
 
 ## Todo
 add db migration & seeder
