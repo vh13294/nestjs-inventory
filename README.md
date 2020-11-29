@@ -79,6 +79,10 @@ npx prisma migrate up "First migration"
 npx prisma migrate up 20200223181448 // Apply all migrations necessary up to
 // also apply to down
 
+npm i -D @prisma/cli@dev
+npx prisma migrate dev --early-access-feature
+npx prisma migrate reset --early-access-feature
+
 ## Seeder
 npm run seeder
 
@@ -101,3 +105,9 @@ docker-compose up -d
 
 ## Todo
 add db migration & seeder
+
+pm2 config file, and exception/error loggers, log viewer, web monitor sign in, separate log
+
+mysql backup using package.json bin & mysql dump child process
+
+https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
