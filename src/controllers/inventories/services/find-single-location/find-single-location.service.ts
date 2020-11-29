@@ -15,8 +15,6 @@ export class FindSingleLocationService {
   async findSingleLocation(
     findSingleLocationInventoryParams: FindSingleLocationInventoryParams,
   ): Promise<paginateWrapper<findSingleLocationInventory[]>> {
-    console.log(findSingleLocationInventoryParams);
-
     const inventoryFilter: Prisma.InventoryWhereInput = {
       product_id: findSingleLocationInventoryParams.productId,
       location_id: findSingleLocationInventoryParams.locationId,

@@ -109,6 +109,9 @@ docker-compose up -d
 ## PM2
 npm i -D pm2
 
+# Sentry.io
+npm i --save @ntegral/nestjs-sentry
+
 ## Todo
 add db migration & seeder
 

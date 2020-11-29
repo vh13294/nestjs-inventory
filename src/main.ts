@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import {
@@ -6,11 +6,13 @@ import {
   NestApplicationOptions,
   ValidationPipe,
 } from '@nestjs/common';
+import { AllExceptionsFilter } from './config/all-exceptions.filter';
 
 // you can bootstrap multiple modules to have nested routes
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, getOptions());
   setGlobalPrefix(app);
+  initExceptionsFilter(app);
   initSwagger(app);
   initPipes(app);
   await app.listen(3000);
@@ -25,6 +27,11 @@ function getOptions() {
 
 function setGlobalPrefix(app: INestApplication) {
   app.setGlobalPrefix('v1');
+}
+
+function initExceptionsFilter(app: INestApplication) {
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
 }
 
 function initSwagger(app: INestApplication) {

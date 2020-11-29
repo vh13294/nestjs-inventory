@@ -5,7 +5,7 @@ export class CreateInventoryDto {
   quantity: number;
 
   @IsDateString()
-  date: Date;
+  date: string;
 
   @IsInt()
   userId: number;

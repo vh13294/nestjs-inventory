@@ -3,6 +3,7 @@
         "datetime",
         "dtos",
         "nestjs",
+        "ntegral",
         "typeorm",
         "upsert",
         "varchar"
