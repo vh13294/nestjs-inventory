@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { SentryModule } from '@ntegral/nestjs-sentry/dist/sentry.module';
+import { RavenModule } from 'nest-raven';
 
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { sentryOptions } from './config/sentry.config';
+import { RavenProvider } from './config/raven.provider';
 import { InventoriesModule } from './controllers/inventories/inventories.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(), // load .env file
-    SentryModule.forRoot(sentryOptions()),
+    RavenModule,
     PrismaModule,
     InventoriesModule,
   ],
+  providers: [RavenProvider],
 })
 export class AppModule {}

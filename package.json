@@ -32,8 +32,8 @@
     "@nestjs/config": "^0.6.1",
     "@nestjs/core": "^7.5.5",
     "@nestjs/platform-express": "^7.5.5",
-    "@ntegral/nestjs-sentry": "^1.0.4",
     "@prisma/client": "^2.12.1",
+    "nest-raven": "^7.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2"
   },

@@ -111,6 +111,8 @@ npm i -D pm2
 
 # Sentry.io
 npm i --save @ntegral/nestjs-sentry
+npm i --save nest-raven
+
 
 ## Todo
 add db migration & seeder
