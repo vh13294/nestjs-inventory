@@ -113,6 +113,11 @@ npm i -D pm2
 npm i --save @ntegral/nestjs-sentry
 npm i --save nest-raven
 
+// typescript source map
+// https://stackoverflow.com/a/59001971/9433621
+// https://docs.sentry.io/platforms/node/typescript/
+npm i --save @sentry/integrations
+
 
 ## Todo
 add db migration & seeder

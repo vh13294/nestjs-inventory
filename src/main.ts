@@ -1,12 +1,14 @@
-import { HttpAdapterHost, NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import * as Sentry from '@sentry/node';
 import {
   INestApplication,
   NestApplicationOptions,
   ValidationPipe,
 } from '@nestjs/common';
+
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
+import * as Sentry from '@sentry/node';
 
 // you can bootstrap multiple modules to have nested routes
 async function bootstrap() {
