@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateInventoryDto } from './create-inventory.dto';
 import {
@@ -21,7 +21,14 @@ export class CreateInventoryService {
       location_id: createInventoryDto.locationId,
       product_id: createInventoryDto.productId,
     };
-    const inventory = await this.prismaService.inventory.create({ data: data });
-    return inventoryTransform(inventory);
+
+    try {
+      const inventory = await this.prismaService.inventory.create({
+        data: data,
+      });
+      return inventoryTransform(inventory);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

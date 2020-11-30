@@ -122,7 +122,7 @@ npm i --save @sentry/integrations
 ## Todo
 add db migration & seeder
 
-pm2 config file, and exception/error loggers, log viewer, web monitor sign in, separate log
+pm2 config file, web monitor
 
 mysql backup using package.json bin & mysql dump child process
 
