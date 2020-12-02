@@ -53,8 +53,6 @@ npx nest g service inventories
 npm i --save @nestjs/config
 
 
-
-
 ## PRISMA
 npm install @prisma/cli --save-dev
 npm install @prisma/client
@@ -85,13 +83,11 @@ npm i -D @prisma/cli@dev
 npx prisma migrate dev --early-access-feature
 npx prisma migrate reset --early-access-feature
 
-## Seeder
+# Seeder
 npm run seeder
 
 npm install faker --save-dev
 npm install @types/faker --save-dev
-
-
 
 
 ## Update
@@ -109,7 +105,7 @@ docker-compose up -d
 ## PM2
 npm i -D pm2
 
-# Sentry.io
+## Sentry.io
 npm i --save @ntegral/nestjs-sentry
 npm i --save nest-raven
 
