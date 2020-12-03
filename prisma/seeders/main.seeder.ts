@@ -11,6 +11,13 @@ async function main() {
     console.time()
     const prisma = new PrismaClient()
 
+    // todo not trigger
+    try {
+        await prisma.$connect()
+    } catch (error) {
+        throw error
+    }
+
     // static data
     await Promise.all([
         customerSeeder(prisma),
