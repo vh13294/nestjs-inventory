@@ -53,8 +53,6 @@ npx nest g service inventories
 npm i --save @nestjs/config
 
 
-
-
 ## PRISMA
 npm install @prisma/cli --save-dev
 npm install @prisma/client
@@ -85,13 +83,11 @@ npm i -D @prisma/cli@dev
 npx prisma migrate dev --early-access-feature
 npx prisma migrate reset --early-access-feature
 
-## Seeder
+# Seeder
 npm run seeder
 
 npm install faker --save-dev
 npm install @types/faker --save-dev
-
-
 
 
 ## Update
@@ -109,7 +105,7 @@ docker-compose up -d
 ## PM2
 npm i -D pm2
 
-# Sentry.io
+## Sentry.io
 npm i --save @ntegral/nestjs-sentry
 npm i --save nest-raven
 
@@ -124,12 +120,14 @@ add db migration & seeder
 
 pm2 config file, web monitor
 
+Add scheduling (dynamic load node_instance_num == 0)
+
 mysql backup using package.json bin & mysql dump child process
 
 https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
 
 Add auth
 
-Add scheduling (dynamic load node_instance_num == 0)
-
 choose email template (maybe handle bar) and render mjml sendgrid
+
+CI/CD using github action, (store .env on instance and move with command)
