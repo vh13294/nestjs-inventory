@@ -66,7 +66,7 @@ npx prisma studio
 
 npx @prisma/codemods update-2.12 ./  // automatically update
 
-# Migration
+### Migration
 npx prisma db push // during development
 
 npx prisma migrate save
@@ -83,7 +83,7 @@ npm i -D @prisma/cli@dev
 npx prisma migrate dev --early-access-feature
 npx prisma migrate reset --early-access-feature
 
-# Seeder
+### Seeder
 npm run seeder
 
 npm install faker --save-dev
@@ -107,9 +107,9 @@ npm i -D pm2
 
 ## Sentry.io
 npm i --save @ntegral/nestjs-sentry
-npm i --save nest-raven
+npm i --save nest-raven // prefer
 
-// typescript source map
+// typescript source map // wont map external package
 // https://stackoverflow.com/a/59001971/9433621
 // https://docs.sentry.io/platforms/node/typescript/
 npm i --save @sentry/integrations
@@ -127,7 +127,5 @@ mysql backup using package.json bin & mysql dump child process
 https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
 
 Add auth
-
-choose email template (maybe handle bar) and render mjml sendgrid
 
 CI/CD using github action, (store .env on instance and move with command)
