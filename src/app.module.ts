@@ -4,14 +4,14 @@ import { RavenModule } from 'nest-raven';
 
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { RavenProvider } from './config/raven.provider';
-import { InventoriesModule } from './controllers/inventories/inventories.module';
+import { InventoryModule } from './modules/inventory/inventory.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(), // load .env file
     RavenModule,
     PrismaModule,
-    InventoriesModule,
+    InventoryModule,
   ],
   providers: [RavenProvider],
 })
