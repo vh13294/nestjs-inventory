@@ -121,6 +121,11 @@ add db migration & seeder
 pm2 config file, web monitor
 
 Add scheduling (dynamic load node_instance_num == 0)
+// also test for blocking event loop?
+// such as long running prisma create
+### or Use bull MQ, with taskforce.sh online monitoring,
+// include schedule && other features
+https://github.com/nestjs/bull/issues/202
 
 mysql backup using package.json bin & mysql dump child process
 
