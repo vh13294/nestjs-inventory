@@ -134,6 +134,4 @@ https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
 
 Add auth
 
-choose email template (maybe handle bar) and render mjml sendgrid
-
 CI/CD using github action, (store .env on instance and move with command)
