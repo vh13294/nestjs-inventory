@@ -120,6 +120,7 @@ add db migration & seeder
 
 pm2 config file, web monitor
 
+### Scheduling
 Add scheduling (dynamic load node_instance_num == 0)
 // also test for blocking event loop?
 // such as long running prisma create
@@ -132,5 +133,7 @@ mysql backup using package.json bin & mysql dump child process
 https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
 
 Add auth
+
+choose email template (maybe handle bar) and render mjml sendgrid
 
 CI/CD using github action, (store .env on instance and move with command)
