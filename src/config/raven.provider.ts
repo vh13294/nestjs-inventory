@@ -8,6 +8,7 @@ export const RavenProvider: Provider = {
     filters: [
       {
         type: HttpException,
+        // only catch 500+
         filter: (exception: HttpException) => 500 > exception.getStatus(),
       },
     ],

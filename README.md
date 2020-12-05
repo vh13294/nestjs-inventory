@@ -135,3 +135,5 @@ https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
 Add auth
 
 CI/CD using github action, (store .env on instance and move with command)
+
+git pull master vs git pull --rebase master
