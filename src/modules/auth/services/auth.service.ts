@@ -1,12 +1,18 @@
 import { hash, compare } from 'bcrypt';
 
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { UserService } from '../user/user.service';
-import { CreateUserDto } from '../user/create-user.dto';
+import { UserService } from './user.service';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { JwtService } from '@nestjs/jwt/dist/jwt.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
+  ) {
+    // check if JWT_EXPIRATION_TIME && JWT_SECRET are empty
+  }
 
   async register(registrationData: CreateUserDto) {
     const hashedPassword = await hash(registrationData.password, 10);
@@ -40,5 +46,21 @@ export class AuthService {
     if (!isPasswordMatching) {
       throw new BadRequestException('Wrong credentials provided');
     }
+  }
+
+  getCookieWithJwtToken(userId: number) {
+    const payload = { userId };
+    const token = this.jwtService.sign(payload);
+    return `Authentication=${token};
+            HttpOnly;
+            Path=/;
+            Max-Age=${process.env.JWT_EXPIRATION_TIME}`;
+  }
+
+  getCookieForLogOut() {
+    return `Authentication=;
+            HttpOnly;
+            Path=/;
+            Max-Age=0`;
   }
 }

@@ -137,3 +137,15 @@ Add auth
 CI/CD using github action, (store .env on instance and move with command)
 
 git pull master vs git pull --rebase master
+
+xss (inner html, inject http:</script> link via email) client view target page(add on injected script), 
+csrf (one-click attack or session riding) forge a link to send http to attacker that include session/cookie
+// or http://bank.com/transfer.do?acct=BOB&amount=100 link that mimic http request action
+
+
+
+## Auth
+import * as cookieParser from 'cookie-parser';
+app.use(cookieParser());
+
+// use JwtAuthGuard

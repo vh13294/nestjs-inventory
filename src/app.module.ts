@@ -8,7 +8,9 @@ import { InventoryModule } from './modules/inventory/inventory.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), // load .env file
+    ConfigModule.forRoot({
+      envFilePath: ['.env', './env/.env.development'],
+    }), // load .env file
     RavenModule,
     PrismaModule,
     InventoryModule,
