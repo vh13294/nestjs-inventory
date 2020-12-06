@@ -34,6 +34,8 @@
     "@nestjs/platform-express": "^7.5.5",
     "@prisma/client": "^2.12.1",
     "@sentry/integrations": "^5.28.0",
+    "@types/bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "nest-raven": "^7.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2"
