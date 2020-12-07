@@ -3,7 +3,7 @@ import { hash, compare } from 'bcrypt';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { JwtService } from '@nestjs/jwt/dist/jwt.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +11,7 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {
-    // check if JWT_EXPIRATION_TIME && JWT_SECRET are empty
+    // check if JWT_ENV are empty
   }
 
   async register(registrationData: CreateUserDto) {
@@ -48,19 +48,38 @@ export class AuthService {
     }
   }
 
-  getCookieWithJwtToken(userId: number) {
+  getCookieWithJwtAccessToken(userId: number) {
     const payload = { userId };
-    const token = this.jwtService.sign(payload);
+    const token = this.jwtService.sign(payload, {
+      secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+      expiresIn: `${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}s`,
+    });
     return `Authentication=${token};
             HttpOnly;
             Path=/;
-            Max-Age=${process.env.JWT_EXPIRATION_TIME}`;
+            Max-Age=${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}`;
   }
 
-  getCookieForLogOut() {
-    return `Authentication=;
-            HttpOnly;
-            Path=/;
-            Max-Age=0`;
+  getCookieWithJwtRefreshToken(userId: number) {
+    const payload = { userId };
+    const token = this.jwtService.sign(payload, {
+      secret: process.env.JWT_REFRESH_TOKEN_SECRET,
+      expiresIn: `${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}s`,
+    });
+    const cookie = `Refresh=${token};
+                    HttpOnly;
+                    Path=/;
+                    Max-Age=${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}`;
+    return {
+      refreshCookie: cookie,
+      refreshToken: token,
+    };
+  }
+
+  public getCookiesForLogOut() {
+    return [
+      'Authentication=; HttpOnly; Path=/; Max-Age=0',
+      'Refresh=; HttpOnly; Path=/; Max-Age=0',
+    ];
   }
 }

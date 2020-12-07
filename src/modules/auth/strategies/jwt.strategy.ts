@@ -8,16 +8,18 @@ import { UserService } from '../services/user.service';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly userService: UserService) {
     super({
+      passReqToCallback: true,
+      secretOrKey: process.env.JWT_REFRESH_TOKEN_SECRET,
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
           return request?.cookies?.Authentication;
         },
       ]),
-      secretOrKey: process.env.JWT_SECRET,
     });
   }
 
-  async validate({ userId }) {
-    return this.userService.getById(userId);
+  async validate(request: Request, userId: number) {
+    const refreshToken = request.cookies?.Refresh;
+    return this.userService.getUserIfRefreshTokenMatches(refreshToken, userId);
   }
 }

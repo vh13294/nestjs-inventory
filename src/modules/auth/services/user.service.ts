@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { compare, hash } from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 
@@ -6,7 +7,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 export class UserService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getById(id: number) {
+  async getUserById(id: number) {
     const user = await this.prismaService.user.findUnique({
       where: {
         id: id,
@@ -40,5 +41,38 @@ export class UserService {
       },
     });
     return newUser;
+  }
+
+  async setCurrentRefreshToken(refreshToken: string, userId: number) {
+    const currentHashedRefreshToken = await hash(refreshToken, 10);
+    await this.prismaService.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        api_token: currentHashedRefreshToken,
+      },
+    });
+  }
+
+  async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
+    const user = await this.getUserById(userId);
+
+    const isTokenMatching = await compare(refreshToken, user.api_token);
+
+    if (isTokenMatching) {
+      return user;
+    }
+  }
+
+  async removeRefreshToken(userId: number) {
+    return this.prismaService.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        api_token: null,
+      },
+    });
   }
 }
