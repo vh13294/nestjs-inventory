@@ -49,10 +49,6 @@ npx nest g controller inventories
 npx nest g service inventories
 
 
-## ENV
-npm i --save @nestjs/config
-
-
 ## PRISMA
 npm install @prisma/cli --save-dev
 npm install @prisma/client
@@ -149,3 +145,18 @@ import * as cookieParser from 'cookie-parser';
 app.use(cookieParser());
 
 // use JwtAuthGuard
+
+
+
+## DotENV
+npm install dotenv
+
+// for testing
+node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
+
+// use only one env?
+cp env/.env.development .env
+
+
+## ENV
+npm i --save @nestjs/config
