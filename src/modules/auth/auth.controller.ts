@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { RequestWithUser } from './interface/request-with-user.interface';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from './dto/user.dto';
 
 import { AuthService } from './services/auth.service';
 
@@ -22,12 +22,12 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() registrationData: CreateUserDto) {
+  async register(@Body() registrationData: UserDto) {
     return this.authService.register(registrationData);
   }
 
   @UseGuards(LocalAuthGuard)
-  @Post('logIn')
+  @Post('log-in')
   async logIn(@Req() req: RequestWithUser, @Res() res: Response) {
     const { user } = req;
 
@@ -44,7 +44,7 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthAccessGuard)
-  @Post('logOut')
+  @Post('log-out')
   async logOut(@Req() req: RequestWithUser, @Res() res: Response) {
     const { user } = req;
     await this.authService.removeRefreshToken(user.id);
@@ -53,7 +53,7 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthAccessGuard)
-  @Get('checkJwt')
+  @Get('check-jwt')
   authenticate(@Req() req: RequestWithUser) {
     const { user } = req;
     return user;

@@ -9,11 +9,13 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import * as Sentry from '@sentry/node';
+import * as cookieParser from 'cookie-parser';
 
 // you can bootstrap multiple modules to have nested routes
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, getOptions());
   setGlobalPrefix(app);
+  setCookieParser(app);
   initSentry();
   initSwagger(app);
   initPipes(app);
@@ -25,6 +27,10 @@ function getOptions() {
     logger: ['error', 'warn'],
   };
   return process.env.NODE_ENV === 'production' ? options : {};
+}
+
+function setCookieParser(app: INestApplication) {
+  app.use(cookieParser());
 }
 
 function setGlobalPrefix(app: INestApplication) {

@@ -2,7 +2,7 @@ import { hash, compare } from 'bcrypt';
 
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { UserDto } from '../dto/user.dto';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -11,17 +11,29 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {
-    // check if JWT_ENV are empty
+    const areRequiredFieldsPresented = [
+      process.env.JWT_ACCESS_TOKEN_SECRET,
+      process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS,
+      process.env.JWT_REFRESH_TOKEN_SECRET,
+      process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS,
+    ].every((value) => value !== undefined);
+
+    if (!areRequiredFieldsPresented) {
+      throw new Error('Missing jwt in env');
+    }
   }
 
-  async register(registrationData: CreateUserDto) {
+  async register(registrationData: UserDto) {
     const hashedPassword = await hash(registrationData.password, 10);
     registrationData.password = hashedPassword;
 
     try {
-      const createdUser = await this.userService.createUser(registrationData);
-      // avoid returning password
-      return createdUser.id;
+      const {
+        api_token,
+        password,
+        ...user
+      } = await this.userService.createUser(registrationData);
+      return user;
     } catch (error) {
       throw new BadRequestException(error);
     }
@@ -29,10 +41,13 @@ export class AuthService {
 
   async getAuthenticatedUser(email: string, plainTextPassword: string) {
     try {
-      const user = await this.userService.getUserByEmail(email);
-      await this.verifyPassword(plainTextPassword, user.password);
-      // avoid returning password
-      return user.id;
+      const {
+        api_token,
+        password,
+        ...user
+      } = await this.userService.getUserByEmail(email);
+      await this.verifyPassword(plainTextPassword, password);
+      return user;
     } catch (error) {
       throw new BadRequestException(error);
     }
@@ -54,10 +69,12 @@ export class AuthService {
       secret: process.env.JWT_ACCESS_TOKEN_SECRET,
       expiresIn: `${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}s`,
     });
-    return `Authentication=${token};
-            HttpOnly;
-            Path=/;
-            Max-Age=${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}`;
+    return (
+      `Authentication=${token}; ` +
+      'HttpOnly; ' +
+      'Path=/; ' +
+      `Max-Age=${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}`
+    );
   }
 
   getCookieWithJwtRefreshToken(userId: number) {
@@ -66,10 +83,13 @@ export class AuthService {
       secret: process.env.JWT_REFRESH_TOKEN_SECRET,
       expiresIn: `${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}s`,
     });
-    const cookie = `Refresh=${token};
-                    HttpOnly;
-                    Path=/;
-                    Max-Age=${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}`;
+
+    const cookie =
+      `Refresh=${token}; ` +
+      'HttpOnly; ' +
+      'Path=/; ' +
+      `Max-Age=${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}`;
+
     return {
       refreshCookie: cookie,
       refreshToken: token,
@@ -89,10 +109,10 @@ export class AuthService {
   }
 
   async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
-    const user = await this.userService.getUserById(userId);
-
-    const isTokenMatching = await compare(refreshToken, user.api_token);
-
+    const { api_token, password, ...user } = await this.userService.getUserById(
+      userId,
+    );
+    const isTokenMatching = await compare(refreshToken, api_token);
     if (isTokenMatching) {
       return user;
     }
@@ -100,5 +120,12 @@ export class AuthService {
 
   async removeRefreshToken(userId: number) {
     await this.userService.removeRefreshToken(userId);
+  }
+
+  async getUserById(userId: number) {
+    const { api_token, password, ...user } = await this.userService.getUserById(
+      userId,
+    );
+    return user;
   }
 }

@@ -12,9 +12,6 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
@@ -88,7 +85,6 @@ npm install @types/faker --save-dev
 
 ## Update
 npm update (include cli)
-<!-- npx @nestjs/cli update -->
 npx nest info
 npm outdated
 npx npm-check-updates -u
@@ -100,6 +96,9 @@ docker-compose up -d
 
 ## PM2
 npm i -D pm2
+// update
+ecosystem.config.js
+npm run pm2:start
 
 ## Sentry.io
 npm i --save @ntegral/nestjs-sentry
@@ -113,9 +112,7 @@ npm i --save @sentry/integrations
 
 ## Todo
 add db migration & seeder
-
 pm2 config file, web monitor
-
 ### Scheduling
 Add scheduling (dynamic load node_instance_num == 0)
 // also test for blocking event loop?
@@ -123,30 +120,22 @@ Add scheduling (dynamic load node_instance_num == 0)
 ### or Use bull MQ, with taskforce.sh online monitoring,
 // include schedule && other features
 https://github.com/nestjs/bull/issues/202
+### Others
+- mysql backup using package.json bin & mysql dump child process
+- https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
 
-mysql backup using package.json bin & mysql dump child process
-
-https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
-
-Add auth
-
-CI/CD using github action, (store .env on instance and move with command)
-
-git pull master vs git pull --rebase master
-
-xss (inner html, inject http:</script> link via email) client view target page(add on injected script), 
-csrf (one-click attack or session riding) forge a link to send http to attacker that include session/cookie
-// or http://bank.com/transfer.do?acct=BOB&amount=100 link that mimic http request action
-
-
+- CI/CD using github action, (store .env on instance and move with command)
 
 ## Auth
+// error Invalid character in header content ["Set-Cookie"]
 import * as cookieParser from 'cookie-parser';
 app.use(cookieParser());
 
 // use JwtAuthGuard
+// UserService expose password never use directly
+// AuthService (no password nor token will return)
 
-
+// jwt sign payload = { userId }
 
 ## DotENV
 npm install dotenv
@@ -158,5 +147,9 @@ node -r dotenv/config your_script.js dotenv_config_path=/custom/path/to/.env
 cp env/.env.development .env
 
 
-## ENV
-npm i --save @nestjs/config
+## Reminder
+git pull master vs git pull --rebase master
+
+xss (inner html, inject http:</script> link via email) client view target page(add on injected script), 
+csrf (one-click attack or session riding) forge a link to send http to attacker that include session/cookie
+// or http://bank.com/transfer.do?acct=BOB&amount=100 link that mimic http request action

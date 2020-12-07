@@ -5,20 +5,23 @@ import { Request } from 'express';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtRefreshTokenStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-refresh-token',
+) {
   constructor(private readonly authService: AuthService) {
     super({
       passReqToCallback: true,
       secretOrKey: process.env.JWT_REFRESH_TOKEN_SECRET,
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          return request?.cookies?.Authentication;
+          return request?.cookies?.Refresh;
         },
       ]),
     });
   }
 
-  async validate(request: Request, userId: number) {
+  async validate(request: Request, { userId }) {
     const refreshToken = request.cookies?.Refresh;
     return this.authService.getUserIfRefreshTokenMatches(refreshToken, userId);
   }
