@@ -2,11 +2,11 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { Request } from 'express';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly authService: AuthService) {
     super({
       passReqToCallback: true,
       secretOrKey: process.env.JWT_REFRESH_TOKEN_SECRET,
@@ -20,6 +20,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(request: Request, userId: number) {
     const refreshToken = request.cookies?.Refresh;
-    return this.userService.getUserIfRefreshTokenMatches(refreshToken, userId);
+    return this.authService.getUserIfRefreshTokenMatches(refreshToken, userId);
   }
 }

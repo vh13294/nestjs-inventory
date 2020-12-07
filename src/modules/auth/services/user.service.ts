@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { compare, hash } from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 
@@ -31,42 +30,31 @@ export class UserService {
     throw new NotFoundException('User with this email does not exist');
   }
 
-  async createUser(userData: CreateUserDto) {
+  async createUser(user: CreateUserDto) {
     const newUser = await this.prismaService.user.create({
       data: {
-        name: '1',
-        email: '1',
-        password: '1',
-        api_token: '1',
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        api_token: user.apiToken,
       },
     });
     return newUser;
   }
 
-  async setCurrentRefreshToken(refreshToken: string, userId: number) {
-    const currentHashedRefreshToken = await hash(refreshToken, 10);
+  async setRefreshToken(hashedRefreshToken: string, userId: number) {
     await this.prismaService.user.update({
       where: {
         id: userId,
       },
       data: {
-        api_token: currentHashedRefreshToken,
+        api_token: hashedRefreshToken,
       },
     });
   }
 
-  async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
-    const user = await this.getUserById(userId);
-
-    const isTokenMatching = await compare(refreshToken, user.api_token);
-
-    if (isTokenMatching) {
-      return user;
-    }
-  }
-
   async removeRefreshToken(userId: number) {
-    return this.prismaService.user.update({
+    await this.prismaService.user.update({
       where: {
         id: userId,
       },

@@ -82,4 +82,23 @@ export class AuthService {
       'Refresh=; HttpOnly; Path=/; Max-Age=0',
     ];
   }
+
+  async setCurrentRefreshToken(refreshToken: string, userId: number) {
+    const currentHashedRefreshToken = await hash(refreshToken, 10);
+    await this.userService.setRefreshToken(currentHashedRefreshToken, userId);
+  }
+
+  async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
+    const user = await this.userService.getUserById(userId);
+
+    const isTokenMatching = await compare(refreshToken, user.api_token);
+
+    if (isTokenMatching) {
+      return user;
+    }
+  }
+
+  async removeRefreshToken(userId: number) {
+    await this.userService.removeRefreshToken(userId);
+  }
 }

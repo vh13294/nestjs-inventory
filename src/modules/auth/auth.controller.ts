@@ -11,7 +11,6 @@ import { Response } from 'express';
 import { RequestWithUser } from './interface/request-with-user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
 
-import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 
 import { LocalAuthGuard } from './guards/local-auth.guard';
@@ -20,10 +19,7 @@ import { JwtAuthRefreshGuard } from './guards/jwt-auth-refresh.guard';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('register')
   async register(@Body() registrationData: CreateUserDto) {
@@ -41,7 +37,7 @@ export class AuthController {
       refreshCookie,
     } = this.authService.getCookieWithJwtRefreshToken(user.id);
 
-    await this.userService.setCurrentRefreshToken(refreshToken, user.id);
+    await this.authService.setCurrentRefreshToken(refreshToken, user.id);
     res.setHeader('Set-Cookie', [accessCookie, refreshCookie]);
 
     return res.send(user);
@@ -51,7 +47,7 @@ export class AuthController {
   @Post('logOut')
   async logOut(@Req() req: RequestWithUser, @Res() res: Response) {
     const { user } = req;
-    await this.userService.removeRefreshToken(user.id);
+    await this.authService.removeRefreshToken(user.id);
     res.setHeader('Set-Cookie', this.authService.getCookiesForLogOut());
     return res.sendStatus(200);
   }
