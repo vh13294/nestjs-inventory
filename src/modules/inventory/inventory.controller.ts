@@ -6,8 +6,8 @@ import { FindSingleLocationService } from './services/find-single-location/find-
 import { CreateInventoryService } from './services/create-inventory/create-inventory.service';
 import { FindAllService } from './services/find-all/find-all.service';
 
-@Controller('inventories')
-export class InventoriesController {
+@Controller('inventory')
+export class InventoryController {
   constructor(
     private readonly findAllService: FindAllService,
     private readonly createInventoryService: CreateInventoryService,
