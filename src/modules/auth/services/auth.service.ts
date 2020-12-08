@@ -3,7 +3,7 @@ import { hash, compare } from 'bcrypt';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from '../dto/user.dto';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -63,12 +63,22 @@ export class AuthService {
     }
   }
 
+  private signPayloadToken(
+    payload: TokenPayload,
+    option: JwtSignOptions,
+  ): string {
+    const token = this.jwtService.sign(payload, option);
+    return token;
+  }
+
   getCookieWithJwtAccessToken(userId: number) {
-    const payload = { userId };
-    const token = this.jwtService.sign(payload, {
-      secret: process.env.JWT_ACCESS_TOKEN_SECRET,
-      expiresIn: `${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}s`,
-    });
+    const token = this.signPayloadToken(
+      { userId },
+      {
+        secret: process.env.JWT_ACCESS_TOKEN_SECRET,
+        expiresIn: `${process.env.JWT_ACCESS_TOKEN_EXPIRATION_TIME_SECONDS}s`,
+      },
+    );
     return (
       `Authentication=${token}; ` +
       'HttpOnly; ' +
@@ -78,11 +88,13 @@ export class AuthService {
   }
 
   getCookieWithJwtRefreshToken(userId: number) {
-    const payload = { userId };
-    const token = this.jwtService.sign(payload, {
-      secret: process.env.JWT_REFRESH_TOKEN_SECRET,
-      expiresIn: `${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}s`,
-    });
+    const token = this.signPayloadToken(
+      { userId },
+      {
+        secret: process.env.JWT_REFRESH_TOKEN_SECRET,
+        expiresIn: `${process.env.JWT_REFRESH_TOKEN_EXPIRATION_TIME_SECONDS}s`,
+      },
+    );
 
     const cookie =
       `Refresh=${token}; ` +

@@ -145,6 +145,8 @@ Add scheduling (dynamic load node_instance_num == 0)
 ### or Use bull MQ, with taskforce.sh online monitoring,
 // include schedule && other features
 https://github.com/nestjs/bull/issues/202
+### Authorization
+// Role based, with Nest Guard for admin/user/manager
 ### Others
 - mysql backup using package.json bin & mysql dump child process
 - https://dev.to/bahdcoder/mysql-backups-with-node-js-1bn1
