@@ -14,6 +14,13 @@ $ npm run start
 $ npm run start:dev
 ```
 
+## Update
+npm update (include cli)
+npx nest info
+npm outdated
+npx npm-check-updates -u
+
+
 ## Test
 
 ```bash
@@ -79,13 +86,6 @@ npm run seeder
 
 npm install faker --save-dev
 npm install @types/faker --save-dev
-
-
-## Update
-npm update (include cli)
-npx nest info
-npm outdated
-npx npm-check-updates -u
 
 
 ## Docker

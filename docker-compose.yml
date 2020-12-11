@@ -13,15 +13,15 @@ services:
     volumes:
       - db-data:/var/lib/mysql:cached
 
-  mysql-test:
-    container_name: nest_test
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
-    ports:
-      - "3309:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=testing
+  # mysql-test:
+  #   container_name: nest_test
+  #   image: mysql:8
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   ports:
+  #     - "3309:3306"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=secret
+  #     - MYSQL_DATABASE=testing
 
 volumes:
   db-data:
