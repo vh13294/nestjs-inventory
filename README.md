@@ -77,9 +77,8 @@ npx prisma migrate up "First migration"
 npx prisma migrate up 20200223181448 // Apply all migrations necessary up to
 // also apply to down
 
-npm i -D @prisma/cli@dev
-npx prisma migrate dev --early-access-feature
-npx prisma migrate reset --early-access-feature
+npx prisma migrate dev --preview-feature
+npx prisma migrate reset --preview-feature
 
 ### Seeder
 npm run seeder
