@@ -66,6 +66,8 @@ npx @prisma/codemods update-2.12 ./  // automatically update
 
 ### Migration
 npx prisma db push // during development
+npx prisma migrate dev --preview-feature
+npx prisma migrate reset --preview-feature
 
 npx prisma migrate save
 npx prisma migrate save --preview
@@ -77,8 +79,6 @@ npx prisma migrate up "First migration"
 npx prisma migrate up 20200223181448 // Apply all migrations necessary up to
 // also apply to down
 
-npx prisma migrate dev --preview-feature
-npx prisma migrate reset --preview-feature
 
 ### Seeder
 npm run seeder
@@ -106,15 +106,6 @@ npm i --save nest-raven // prefer
 // https://docs.sentry.io/platforms/node/typescript/
 npm i --save @sentry/integrations
 
-## Auth
-// header content ["Set-Cookie"]
-import * as cookieParser from 'cookie-parser';
-app.use(cookieParser());
-
-// UserService expose password never use directly
-// AuthService (no password nor token will return)
-
-// jwt sign payload = { userId }
 
 ## DotENV
 npm install dotenv
